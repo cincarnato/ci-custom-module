@@ -1,9 +1,7 @@
 <template>
 
-    <v-toolbar
-
-            color="primary"
-            dark
+    <v-toolbar color="primary"
+               dark
     >
         <template v-if="mode === LOGO_MODE_SQUARE">
             <v-avatar tile size="50" color="grey lighten-2">
@@ -23,6 +21,7 @@
             <v-img v-if="src" height="50" max-width="150" contain :src="src"/>
             <v-img v-else height="50" contain src="@/assets/logo.png"/>
         </template>
+
         <v-toolbar-title class="onPrimary--text ml-2">
             {{title}}
         </v-toolbar-title>

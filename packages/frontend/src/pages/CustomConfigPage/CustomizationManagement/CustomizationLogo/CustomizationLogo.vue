@@ -72,7 +72,7 @@
     </v-card>
 </template>
 <script>
-    import LogoView from "./LogoView"
+    import LogoView from "../../../../components/LogoView"
     import {mapMutations} from 'vuex'
 
     import {
@@ -80,8 +80,8 @@
         LOGO_MODE_RECTANGLE,
         LOGO_MODE_ROUND,
         LOGO_MODE_SQUARE
-    } from "../constants";
-    import CustomizationProvider from "../providers/CustomizationProvider";
+    } from "../../../../constants";
+    import CustomizationProvider from "../../../../providers/CustomizationProvider";
     import {ClientError} from "front-module-commons";
 
     export default {

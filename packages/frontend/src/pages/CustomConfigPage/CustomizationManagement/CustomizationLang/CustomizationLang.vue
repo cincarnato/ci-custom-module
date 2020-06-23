@@ -35,7 +35,7 @@
     </v-card>
 </template>
 <script>
-    import CustomizationProvider from "../providers/CustomizationProvider";
+    import CustomizationProvider from "../../../../providers/CustomizationProvider";
     import {ClientError} from "front-module-commons";
     import {mapMutations} from "vuex";
 

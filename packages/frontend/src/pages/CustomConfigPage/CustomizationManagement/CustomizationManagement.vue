@@ -1,8 +1,10 @@
 <template>
     <v-row v-if="!loading">
+
         <v-col cols="12" md="3">
             <customization-menu v-model="selected"/>
         </v-col>
+
         <v-col cols="12" md="9">
             <customization-lang v-if="selected === 0"
                                 :form-lang="formLang"
@@ -13,26 +15,25 @@
                                   :form-colors="formColors"
             />
 
-            <customization-logo v-if="selected === 2" :form-logo="formLogo"
+            <customization-logo v-if="selected === 2"
+                                :form-logo="formLogo"
             />
 
-
         </v-col>
+
     </v-row>
 </template>
 
 <script>
-    import CustomizationProvider from "../providers/CustomizationProvider";
-    import {
-        LOGO_MODE_ROUND,
-    } from '../constants'
+    import CustomizationProvider from "../../../providers/CustomizationProvider";
+    import {LOGO_MODE_ONLYTITLE} from '../../../constants'
     import CustomizationMenu from "./CustomizationMenu";
     import CustomizationColors from "./CustomizationColors";
     import CustomizationLogo from "./CustomizationLogo";
     import CustomizationLang from "./CustomizationLang";
 
     export default {
-        name: "Customization",
+        name: "CustomizationManagement",
         components: {CustomizationLang, CustomizationLogo, CustomizationColors, CustomizationMenu},
         created() {
             this.loading = true
@@ -71,8 +72,8 @@
                 },
 
                 formLogo: {
-                    mode: LOGO_MODE_ROUND,
-                    title: '',
+                    mode: LOGO_MODE_ONLYTITLE,
+                    title: 'APP',
                     url: null
                 },
                 formColors: {

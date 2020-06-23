@@ -1,11 +1,16 @@
-import graphqlClient from "../../../apollo";
-
 class CustomizationProvider {
 
+    constructor() {
+        this.gqlc = null
+    }
+
+    setGqlc(gqlc){
+        this.gqlc = gqlc
+    }
 
 
     customization() {
-        return graphqlClient.query({
+        return this.gqlc.query({
             query: require('./gql/customization.graphql')
         })
     }
@@ -13,35 +18,35 @@ class CustomizationProvider {
     
 
     updateCustomization(form) {
-        return graphqlClient.mutate({
+        return this.gqlc.mutate({
             mutation: require('./gql/customizationUpdate.graphql'),
             variables: form
         })
     }
 
     updateColors(form) {
-        return graphqlClient.mutate({
+        return this.gqlc.mutate({
             mutation: require('./gql/colorsUpdate.graphql'),
             variables: form
         })
     }
 
     updateLogo(form) {
-        return graphqlClient.mutate({
+        return this.gqlc.mutate({
             mutation: require('./gql/logoUpdate.graphql'),
             variables: form
         })
     }
 
     updateLanguage(form) {
-        return graphqlClient.mutate({
+        return this.gqlc.mutate({
             mutation: require('./gql/langUpdate.graphql'),
             variables: form
         })
     }
 
     logoUpload(file) {
-        return graphqlClient.mutate({
+        return this.gqlc.mutate({
             mutation: require('./gql/logoUpload.graphql'),
             variables: {file}
         })
@@ -49,6 +54,7 @@ class CustomizationProvider {
 
 }
 
-export default new CustomizationProvider()
+const customizationProvider = new CustomizationProvider()
 
+export default customizationProvider
 

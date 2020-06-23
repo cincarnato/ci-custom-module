@@ -1,9 +1,9 @@
-import CustomizationPage from '../pages/CustomConfigPage/CustomConfigPage'
+import CustomizationPage from '../pages/CustomConfigPage'
 
-export const index = [
+ const routes = [
     {
         name: "customization",
-        path: '/admin/customization',
+        path: '/customization',
         component: CustomizationPage,
         meta: {
             requiresAuth: true,
@@ -12,3 +12,5 @@ export const index = [
     },
 
 ]
+
+export default routes

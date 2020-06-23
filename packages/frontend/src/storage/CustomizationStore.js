@@ -1,21 +1,21 @@
-import vuetify from '../../../plugins/vuetify'
-import i18n from '../../../i18n'
 import CustomizationProvider from "../providers/CustomizationProvider";
 
 const customizationStore =  {
     state: {
+        vuetifyInstance: null,
+        i18nInstance: null,
         colors: {
-            primary: '#000000',
-            secondary: '#000000',
-            onPrimary: '#ffffff',
-            onSecondary: '#ffffff'
+            primary: '#3F51B5',
+            onPrimary: '#FFFFFF',
+            secondary: '#1565C0',
+            onSecondary: '#FFFFFF'
         },
         logo: {
-            mode: 'Round',
-            title: '',
+            mode: 'OnlyTitle',
+            title: 'APP',
             url: ''
         },
-        language: null
+        language: 'en'
     },
     getters: {
         getLogo: state => {
@@ -47,6 +47,12 @@ const customizationStore =  {
         }
     },
     mutations: {
+        setVuetifyInstance(state,vuetifyInstance){
+            state.vuetifyInstance = vuetifyInstance
+        },
+        setI18nInstance(state,i18nInstance){
+            state.i18nInstance = i18nInstance
+        },
         setLogo(state, {mode, title, url}) {
             state.logo.mode = mode
             state.logo.title = title
@@ -58,15 +64,15 @@ const customizationStore =  {
             state.colors.secondary = secondary
             state.colors.onSecondary = onSecondary
 
-            vuetify.framework.theme.themes.light.primary = primary
-            vuetify.framework.theme.themes.light.onPrimary = onPrimary
-            vuetify.framework.theme.themes.light.secondary = secondary
-            vuetify.framework.theme.themes.light.onSecondary = onSecondary
+            state.vuetifyInstance.framework.theme.themes.light.primary = primary
+            state.vuetifyInstance.framework.theme.themes.light.onPrimary = onPrimary
+            state.vuetifyInstance.framework.theme.themes.light.secondary = secondary
+            state.vuetifyInstance.framework.theme.themes.light.onSecondary = onSecondary
 
         },
         setLanguage(state, language) {
             state.language = language
-            i18n.locale = language
+            state.i18nInstance.locale = language
         }
     }
 }

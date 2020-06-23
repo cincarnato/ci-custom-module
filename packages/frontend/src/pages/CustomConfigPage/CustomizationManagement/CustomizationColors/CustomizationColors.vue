@@ -80,7 +80,7 @@
 </template>
 <script>
     import ColorInput from "./ColorInput"
-    import CustomizationProvider from "../providers/CustomizationProvider";
+    import CustomizationProvider from "../../../../providers/CustomizationProvider";
     import {ClientError} from "front-module-commons";
     import {mapMutations} from "vuex";
 
