@@ -1,0 +1,19 @@
+{
+  "name": "@ci-custom-module/frontend",
+  "version": "1.0.0",
+  "description": "vue custom logo, custom theme, custom colors, i18n configuration}",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue",
+    "vuetify",
+    "i18n",
+    "theme",
+    "colors",
+    "custom"
+  ],
+  "author": "Cristian Incarnato",
+  "license": "MIT"
+}
