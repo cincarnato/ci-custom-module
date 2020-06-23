@@ -1,6 +1,6 @@
 import CustomizationProvider from "../providers/CustomizationProvider";
 
-const customizationStore =  {
+const customizationStore = {
     state: {
         vuetifyInstance: null,
         i18nInstance: null,
@@ -29,11 +29,11 @@ const customizationStore =  {
         }
     },
     actions: {
-        loadCustomizations({commit}){
+        loadCustomizations({commit}) {
             CustomizationProvider.customization().then(r => {
-                commit('setColors',r.data.customization.colors)
-                commit('setLogo',r.data.customization.logo)
-                commit('setLanguage',r.data.customization.language)
+                commit('setColors', r.data.customization.colors)
+                commit('setLogo', r.data.customization.logo)
+                commit('setLanguage', r.data.customization.language)
             })
         },
         setLogo({commit}, logo) {
@@ -47,10 +47,10 @@ const customizationStore =  {
         }
     },
     mutations: {
-        setVuetifyInstance(state,vuetifyInstance){
+        setVuetifyInstance(state, vuetifyInstance) {
             state.vuetifyInstance = vuetifyInstance
         },
-        setI18nInstance(state,i18nInstance){
+        setI18nInstance(state, i18nInstance) {
             state.i18nInstance = i18nInstance
         },
         setLogo(state, {mode, title, url}) {
@@ -64,15 +64,20 @@ const customizationStore =  {
             state.colors.secondary = secondary
             state.colors.onSecondary = onSecondary
 
-            state.vuetifyInstance.framework.theme.themes.light.primary = primary
-            state.vuetifyInstance.framework.theme.themes.light.onPrimary = onPrimary
-            state.vuetifyInstance.framework.theme.themes.light.secondary = secondary
-            state.vuetifyInstance.framework.theme.themes.light.onSecondary = onSecondary
+            if (state.vuetifyInstance) {
+                state.vuetifyInstance.framework.theme.themes.light.primary = primary
+                state.vuetifyInstance.framework.theme.themes.light.onPrimary = onPrimary
+                state.vuetifyInstance.framework.theme.themes.light.secondary = secondary
+                state.vuetifyInstance.framework.theme.themes.light.onSecondary = onSecondary
+            }
 
         },
         setLanguage(state, language) {
             state.language = language
-            state.i18nInstance.locale = language
+            if (state.i18nInstance) {
+                state.i18nInstance.locale = language
+
+            }
         }
     }
 }
