@@ -1,6 +1,6 @@
 {
   "name": "@ci-custom-module/frontend",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "vue custom logo, custom theme, custom colors, i18n configuration}",
   "main": "src/index.js",
   "scripts": {
