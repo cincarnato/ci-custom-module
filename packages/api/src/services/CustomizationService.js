@@ -2,7 +2,15 @@ import Customization from '../models/CustomizationModel'
 import {UserInputError} from 'apollo-server-express'
 import path from "path";
 import fs from "fs";
-import {User} from "../../security/models/UserModel";
+import {
+    CUSTOMIZATION_CREATE,
+    CUSTOMIZATION_UPDATE,
+    CUSTOMIZATION_COLORS_UPDATE,
+    CUSTOMIZATION_LANG_UPDATE,
+    CUSTOMIZATION_LOGO_UPDATE
+} from "../permissions";
+import {initPermissions} from "@ci-user-module/api/src/services/InitService";
+
 
 const mongoose = require('mongoose');
 
@@ -17,7 +25,7 @@ export const findCustomization = async function () {
 }
 
 
-export const createCustomization = async function (user, {colors, logo, language}) {
+export const createCustomization = async function ({colors, logo, language}) {
 
     const doc = new Customization({
         colors, logo, language
@@ -25,26 +33,23 @@ export const createCustomization = async function (user, {colors, logo, language
     doc.id = doc._id;
     return new Promise((resolve, rejects) => {
         doc.save((error => {
-
             if (error) {
                 if (error.name == "ValidationError") {
                     rejects(new UserInputError(error.message, {inputErrors: error.errors}));
                 }
                 rejects(error)
             }
-
             resolve(doc)
         }))
     })
 }
 
-export const updateCustomization = async function (user, id, {primary, onPrimary, secondary, onSecondary, logo, language}) {
+export const updateCustomization = async function (id, {colors, logo, language}) {
     return new Promise((resolve, rejects) => {
         Customization.findOneAndUpdate({_id: id},
-            {primary, onPrimary, secondary, onSecondary, logo, language},
+            {colors, logo, language},
             {new: true, runValidators: true, context: 'query'},
             (error, doc) => {
-
                 if (error) {
                     if (error.name == "ValidationError") {
                         rejects(new UserInputError(error.message, {inputErrors: error.errors}));
@@ -57,7 +62,7 @@ export const updateCustomization = async function (user, id, {primary, onPrimary
     })
 }
 
-export const updateColors = async function (user, {primary, onPrimary, secondary, onSecondary}) {
+export const updateColors = async function ({primary, onPrimary, secondary, onSecondary}) {
     return new Promise((resolve, rejects) => {
         let colors = {primary, onPrimary, secondary, onSecondary}
         Customization.findOneAndUpdate({},
@@ -76,7 +81,7 @@ export const updateColors = async function (user, {primary, onPrimary, secondary
     })
 }
 
-export const updateLogo = async function (user, {mode, title}) {
+export const updateLogo = async function ({mode, title}) {
     return new Promise((resolve, rejects) => {
         Customization.findOneAndUpdate({},
             {$set: {'logo.mode': mode, 'logo.title': title}},
@@ -94,7 +99,7 @@ export const updateLogo = async function (user, {mode, title}) {
     })
 }
 
-export const updateLang = async function (user, {language}) {
+export const updateLang = async function ({language}) {
     return new Promise((resolve, rejects) => {
         Customization.findOneAndUpdate({},
             {language},
@@ -113,8 +118,21 @@ export const updateLang = async function (user, {language}) {
     })
 }
 
+const storeFS = (stream, dst) => {
+    return new Promise((resolve, reject) =>
+        stream
+            .on('error', error => {
+                if (stream.truncated)
+                    fs.unlinkSync(dst);
+                reject(error);
+            })
+            .pipe(fs.createWriteStream(dst))
+            .on('error', error => reject(error))
+            .on('finish', () => resolve(true))
+    );
+}
 
-export const uploadLogo = async function (user, file) {
+export const uploadLogo = function (file) {
 
     function randomstring(length) {
         let result = '';
@@ -126,34 +144,71 @@ export const uploadLogo = async function (user, file) {
         return result;
     }
 
-    const {filename, mimetype, encoding, createReadStream} = await file;
+    return new Promise(async (resolve, rejects) => {
 
+        const {filename, mimetype, encoding, createReadStream} = await file;
 
-    const parseFileName = path.parse(filename);
-    const finalFileName = user.username + parseFileName.ext
+        const dst = path.join("media", "logo", filename)
 
-    const rs = createReadStream()
-    const dst = path.join("media", "logo", finalFileName)
-    var wstream = fs.createWriteStream(dst);
-    rs.pipe(wstream);
+        //Store
+        let fileResult = await storeFS(createReadStream(), dst)
 
-    const rand = randomstring(3)
-    const url = process.env.APP_API_URL + "/media/logo/" + finalFileName + "?" + rand
+        if (fileResult) {
 
-    let logo = {
-        filename,
-        url
-    }
-    return new Promise((resolve, rejects) => {
-        Customization.findOneAndUpdate(
-            {}, {$set: {'logo.filename': finalFileName, 'logo.url': url}}, {useFindAndModify: false},
-            (error) => {
-                if (error) rejects({status: false, message: "Falla al intentar guardar el logo en la DB"})
-                else resolve({filename, mimetype, encoding, url})
-            }
-        );
+            const rand = randomstring(3)
+            const url = process.env.APP_API_URL + "/media/logo/" + filename + "?" + rand
+
+            let logo = {filename, url}
+
+            Customization.findOneAndUpdate(
+                {}, {$set: {'logo.filename': filename, 'logo.url': url}}, {useFindAndModify: false},
+                (error) => {
+                    if (error) rejects(new Error("Save Fail"))
+                    else resolve({filename, mimetype, encoding, url})
+                }
+            );
+
+        } else {
+            rejects(new Error("Upload Fail"))
+        }
+
     })
 
+}
 
-    return {filename, mimetype, encoding, url};
+
+export const initCustomization = async function () {
+
+    let customDoc = await findCustomization()
+
+    if (!customDoc) {
+        let customDoc = await createCustomization({
+            colors: {
+                primary: '#3F51B5',
+                onPrimary: '#FFFFFF',
+                secondary: '#1565C0',
+                onSecondary: '#FFFFFF'
+            },
+            logo: {
+                mode: 'OnlyTitle',
+                title: 'APP'
+            },
+            language: 'en'
+        })
+        console.log("Customization created: ", customDoc.id)
+    } else {
+        console.log("Customization found: ", customDoc.id)
+    }
+
+}
+
+
+export const initPermissionsCustomization = async function () {
+    let permissions = [CUSTOMIZATION_CREATE,
+        CUSTOMIZATION_UPDATE,
+        CUSTOMIZATION_COLORS_UPDATE,
+        CUSTOMIZATION_LANG_UPDATE,
+        CUSTOMIZATION_LOGO_UPDATE]
+    await initPermissions(permissions)
+    console.log("Load custom permissions done.")
 }

@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
-const softDelete = require('mongoose-softdelete')
-const mongoosePaginate = require('mongoose-paginate-v2');
 
 const Schema = mongoose.Schema;
-
 
 const colorsSchema = new mongoose.Schema({
     primary: {type: String, required: true},
@@ -26,8 +23,6 @@ const CustomizationSchema = new Schema({
     language: {type: String, required: true}
 });
 
-CustomizationSchema.plugin(softDelete);
-CustomizationSchema.plugin(mongoosePaginate);
 
 const Customization = mongoose.model('Customization', CustomizationSchema);
 
