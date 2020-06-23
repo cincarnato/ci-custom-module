@@ -36,7 +36,7 @@
 </template>
 <script>
     import CustomizationProvider from "../../../../providers/CustomizationProvider";
-    import {ClientError} from "front-module-commons";
+    import {ClientError} from "@ci-user-module/frontend";
     import {mapMutations} from "vuex";
 
     export default {

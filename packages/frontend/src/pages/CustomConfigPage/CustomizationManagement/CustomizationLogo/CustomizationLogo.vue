@@ -82,7 +82,7 @@
         LOGO_MODE_SQUARE
     } from "../../../../constants";
     import CustomizationProvider from "../../../../providers/CustomizationProvider";
-    import {ClientError} from "front-module-commons";
+    import {ClientError} from "@ci-user-module/frontend";
 
     export default {
         name: 'customization-logo',

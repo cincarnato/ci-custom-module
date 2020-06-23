@@ -1,4 +1,14 @@
-import {findCustomization,createCustomization,updateCustomization,updateColors,updateLang,updateLogo, uploadLogo, initCustomization, initPermissionsCustomization} from "./services/CustomizationService";
+import {
+    findCustomization,
+    createCustomization,
+    updateCustomization,
+    updateColors,
+    updateLang,
+    updateLogo,
+    uploadLogo,
+    initCustomization,
+    initPermissionsCustomization
+} from "./services/CustomizationService";
 import * as permissions from './permissions'
 import {types, resolvers} from './graphql'
 
