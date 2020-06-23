@@ -1,6 +1,7 @@
 import CustomConfigPage from "./pages/CustomConfigPage/CustomConfigPage";
 import LogoToolbar from "./components/LogoToolbar";
 import TitleToolbar from "./components/TitleToolbar";
+import LogoPreview from "./components/LogoPreview";
 import i18nMessages from './i18n/messages'
 import customizationProvider from "./providers/CustomizationProvider";
 import routes from './routes'
@@ -12,6 +13,7 @@ export {
     //Components
     LogoToolbar,
     TitleToolbar,
+    LogoPreview,
     //i18n
     i18nMessages,
     //Providers

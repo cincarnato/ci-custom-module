@@ -56,7 +56,7 @@
                             <div v-t="'customization.preview'"></div>
                         </v-card-title>
 
-                        <LogoView :mode="formLogo.mode" :src="formLogo.url" :title="formLogo.title"/>
+                        <logo-preview :mode="formLogo.mode" :src="formLogo.url" :title="formLogo.title" />
                     </v-card>
                 </v-col>
             </v-row>
@@ -72,7 +72,7 @@
     </v-card>
 </template>
 <script>
-    import LogoView from "../../../../components/LogoToolbar"
+    import LogoPreview from "../../../../components/LogoPreview"
     import {mapMutations} from 'vuex'
 
     import {
@@ -86,7 +86,7 @@
 
     export default {
         name: 'customization-logo',
-        components: {LogoView},
+        components: {LogoPreview},
         props: {
             formLogo: {type:Object},
         },
