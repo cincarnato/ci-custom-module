@@ -29,7 +29,7 @@
     </v-toolbar>
 </template>
 <script>
-    import {LOGO_MODE_SQUARE, LOGO_MODE_ROUND, LOGO_MODE_RECTANGLE} from '../CustomizationConstants'
+    import {LOGO_MODE_SQUARE, LOGO_MODE_ROUND, LOGO_MODE_RECTANGLE} from '../constants'
 
     export default {
         name: 'LogoPreview',
