@@ -1,6 +1,6 @@
 {
   "name": "@ci-custom-module/api",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "node, express, graphql, custom color, theme, logo and i18n",
   "main": "src/index.js",
   "scripts": {
@@ -25,10 +25,10 @@
   "homepage": "https://github.com/cincarnato/ci-custom-module#readme",
   "dependencies": {
     "@ci-user-module/api": "^1.0.25",
+    "apollo-server-express": "^2.15.0",
     "graphql": "^14.5.8",
     "graphql-import": "^0.7.1",
     "graphql-tools": "^4.0.5",
-    "mongoose": "^5.9.19",
-    "apollo-server-express": "^2.15.0"
+    "mongoose": "^5.9.19"
   }
 }
