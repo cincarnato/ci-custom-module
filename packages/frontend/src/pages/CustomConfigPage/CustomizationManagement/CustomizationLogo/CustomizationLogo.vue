@@ -72,7 +72,7 @@
     </v-card>
 </template>
 <script>
-    import LogoView from "../../../../components/LogoView"
+    import LogoView from "../../../../components/LogoToolbar"
     import {mapMutations} from 'vuex'
 
     import {

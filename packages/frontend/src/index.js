@@ -1,5 +1,5 @@
 import CustomConfigPage from "./pages/CustomConfigPage/CustomConfigPage";
-import LogoView from "./components/LogoView";
+import LogoView from "./components/LogoToolbar";
 import i18nMessages from './i18n/messages'
 import customizationProvider from "./providers/CustomizationProvider";
 import routes from './routes'
