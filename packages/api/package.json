@@ -1,6 +1,6 @@
 {
   "name": "@ci-custom-module/api",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "node, express, graphql, custom color, theme, logo and i18n",
   "main": "lib/index.js",
   "scripts": {
