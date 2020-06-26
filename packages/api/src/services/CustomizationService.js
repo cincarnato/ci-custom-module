@@ -9,7 +9,7 @@ import {
     CUSTOMIZATION_LANG_UPDATE,
     CUSTOMIZATION_LOGO_UPDATE
 } from "../permissions";
-import {initPermissions} from "@ci-user-module/api/src/services/InitService";
+import {InitService} from "@ci-user-module/api";
 
 
 const mongoose = require('mongoose');
@@ -209,6 +209,6 @@ export const initPermissionsCustomization = async function () {
         CUSTOMIZATION_COLORS_UPDATE,
         CUSTOMIZATION_LANG_UPDATE,
         CUSTOMIZATION_LOGO_UPDATE]
-    await initPermissions(permissions)
+    await InitService.initPermissions(permissions)
     console.log("Load custom permissions done.")
 }
