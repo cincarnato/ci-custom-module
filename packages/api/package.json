@@ -2,9 +2,10 @@
   "name": "@ci-custom-module/api",
   "version": "1.0.2",
   "description": "node, express, graphql, custom color, theme, logo and i18n",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --runInBand",
+    "prepublish": "./node_modules/.bin/babel src -d lib --copy-files"
   },
   "repository": {
     "type": "git",
@@ -24,11 +25,22 @@
   },
   "homepage": "https://github.com/cincarnato/ci-custom-module#readme",
   "dependencies": {
-    "@ci-user-module/api": "^1.0.25",
+    "@ci-user-module/api": "^1.0.41",
     "apollo-server-express": "^2.15.0",
     "graphql": "^14.5.8",
     "graphql-import": "^0.7.1",
     "graphql-tools": "^4.0.5",
     "mongoose": "^5.9.19"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@shelf/jest-mongodb": "^1.1.5",
+    "babel-jest": "^25.4.0",
+    "jest": "^25.4.0",
+    "mongodb-memory-server": "^6.5.2",
+    "nodemon": "^1.19.4"
   }
 }
