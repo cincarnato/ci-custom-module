@@ -3,6 +3,7 @@ import {UserInputError} from 'apollo-server-express'
 import path from "path";
 import fs from "fs";
 import {
+    CUSTOMIZATION_SHOW,
     CUSTOMIZATION_CREATE,
     CUSTOMIZATION_UPDATE,
     CUSTOMIZATION_COLORS_UPDATE,
@@ -204,7 +205,9 @@ export const initCustomization = async function () {
 
 
 export const initPermissionsCustomization = async function () {
-    let permissions = [CUSTOMIZATION_CREATE,
+    let permissions = [
+        CUSTOMIZATION_SHOW,
+        CUSTOMIZATION_CREATE,
         CUSTOMIZATION_UPDATE,
         CUSTOMIZATION_COLORS_UPDATE,
         CUSTOMIZATION_LANG_UPDATE,
