@@ -11,9 +11,7 @@ import {
     CUSTOMIZATION_LOGO_UPDATE
 } from "../permissions";
 import {InitService} from "@ci-user-module/api";
-
-
-const mongoose = require('mongoose');
+import {createDirIfNotExist} from "./helpers/createDirIfNotExist";
 
 
 export const findCustomization = async function () {
@@ -152,6 +150,7 @@ export const uploadLogo = function (file) {
         const dst = path.join("media", "logo", filename)
 
         //Store
+        createDirIfNotExist(dst)
         let fileResult = await storeFS(createReadStream(), dst)
 
         if (fileResult) {
