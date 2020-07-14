@@ -11,7 +11,7 @@ import {
     CUSTOMIZATION_LOGO_UPDATE
 } from "../permissions";
 import {InitService} from "@ci-user-module/api";
-import {createDirIfNotExist} from "./helpers/createDirIfNotExist";
+import createDirIfNotExist from "./helpers/createDirIfNotExist";
 
 
 export const findCustomization = async function () {
