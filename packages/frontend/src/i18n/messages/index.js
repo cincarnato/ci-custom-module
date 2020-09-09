@@ -36,6 +36,16 @@ const messages = {
                 }
             },
 
+        },
+        role: {
+            permissions: {
+                CUSTOMIZATION_SHOW: "Customize display",
+                CUSTOMIZATION_CREATE: "Customize creation",
+                CUSTOMIZATION_UPDATE: "Customize edition",
+                CUSTOMIZATION_LANG_UPDATE: "Lang edition",
+                CUSTOMIZATION_COLORS_UPDATE: "Colors edition",
+                CUSTOMIZATION_LOGO_UPDATE: "Logo edition"
+            }
         }
     },
     es: {
@@ -73,6 +83,16 @@ const messages = {
                     upload: 'Subir logo'
                 }
             },
+        },
+        role: {
+            permissions: {
+                CUSTOMIZATION_SHOW: "Visualizar Personalización",
+                CUSTOMIZATION_CREATE: "Creación de Personalización",
+                CUSTOMIZATION_UPDATE: "Edición de Personalización",
+                CUSTOMIZATION_LANG_UPDATE: "Edición de lenguaje",
+                CUSTOMIZATION_COLORS_UPDATE: "Edición de colores",
+                CUSTOMIZATION_LOGO_UPDATE: "Edición de logo"
+            }
         }
     },
     pt: {
@@ -111,6 +131,16 @@ const messages = {
                 }
             },
 
+        },
+        role: {
+            permissions: {
+                CUSTOMIZATION_SHOW: "Visualização Personalização",
+                CUSTOMIZATION_CREATE: "Criação de Personalização",
+                CUSTOMIZATION_UPDATE: "Edição de Personalização",
+                CUSTOMIZATION_LANG_UPDATE: "Edição de linguagem",
+                CUSTOMIZATION_COLORS_UPDATE: "Edição de cor",
+                CUSTOMIZATION_LOGO_UPDATE: "Edição do logotipo"
+            }
         }
     }
 
